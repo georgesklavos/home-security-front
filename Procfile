@@ -1,1 +1,3 @@
-web: npm serve
+build:
+  docker:
+    web: Dockerfile
