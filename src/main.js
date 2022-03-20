@@ -19,7 +19,7 @@ import MultiSelect  from "primevue/multiselect";
 
 const app = createApp(App);
 app.use(PrimeVue);
-app.use(store);
+app.use(store); 
 app.use(router);
 app.component("Dialog", Dialog);
 app.component("InputText",InputText);
