@@ -2,14 +2,14 @@
   <div style="margin-bottom: 4rem">
     <Menubar :model="items">
       <template #end>
-        <ul class="p-menubar-root-list" role="menubar">
-          <li class="p-menuitem">
-            <a href="/main/logout" class="p-menuitem-link" role="menuitem">
+         <!-- <ul class="p-menubar-root-list" role="menubar"> -->
+          <div class="p-menuitem"> 
+            <a href="/logout" class="p-menuitem-link" role="menuitem" style="border-radius:6px !important;">
               <span class="p-menuitem-icon pi pi-fw pi-sign-out"></span>
               <span class="p-menuitem-text">Logout</span>
             </a>
-          </li>
-        </ul>
+          </div>
+        <!-- </ul>  -->
       </template>
     </Menubar>
   </div>

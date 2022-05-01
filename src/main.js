@@ -16,11 +16,15 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Dropdown from "primevue/dropdown";
 import MultiSelect  from "primevue/multiselect";
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 const app = createApp(App);
 app.use(PrimeVue);
-app.use(store); 
 app.use(router);
+// app.config.globalProperties.$router = router;
+app.use(store); 
+app.use(ToastService);
 app.component("Dialog", Dialog);
 app.component("InputText",InputText);
 app.component("Card",Card);
@@ -30,5 +34,9 @@ app.component("DataTable",DataTable);
 app.component("Column",Column);
 app.component("Dropdown",Dropdown);
 app.component("MultiSelect",MultiSelect);
+app.component('Toast', Toast);
+
 
 app.mount('#app');
+
+export {app};

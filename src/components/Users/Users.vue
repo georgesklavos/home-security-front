@@ -1,5 +1,9 @@
 <template>
-  <AddEditUser :viewValue="showUser" @closeDialog="close" :userIdValue="userId"></AddEditUser>
+  <AddEditUser
+    :viewValue="showUser"
+    @closeDialog="close"
+    :userData="userData"
+  ></AddEditUser>
   <DataTable
     :value="users"
     :paginator="true"
@@ -22,7 +26,7 @@
     <template #empty> No users found. </template>
     <Column field="id" header="ID" sortable>
       <template #body="{ data }">
-        {{ data.id }}
+        {{ data._id }}
       </template>
     </Column>
     <Column field="firstName" header="First name" sortable>
@@ -40,9 +44,9 @@
         {{ data.email }}
       </template>
     </Column>
-    <Column field="address" header="Address" sortable>
+    <Column field="role" header="Role" sortable>
       <template #body="{ data }">
-        {{ data.address }}
+        {{ data.admin ? "Admin" : "Client" }}
       </template>
     </Column>
     <Column
@@ -50,15 +54,19 @@
       headerStyle="width: 10rem; text-align: center;"
       bodyStyle="text-align: center; overflow: visible"
     >
-      <template #body="{data}">
-        <Button type="button" icon="pi pi-user-edit" @click="editUser(data)"></Button>
+      <template #body="{ data }">
+        <Button
+          type="button"
+          icon="pi pi-user-edit"
+          @click="editUser(data)"
+        ></Button>
       </template>
     </Column>
   </DataTable>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import AddEditUser from "./AddEditUser.vue";
 
 export default {
@@ -70,33 +78,36 @@ export default {
     return {
       loading: false,
       showUser: false,
-      userId: null,
-      users: [
-        {
-          id: 1,
-          firstName: "first name",
-          lastName: "last name",
-          email: "test@gmail.com",
-          address: "Test address",
-        },
-      ],
+      userData: null,
     };
+  },
+  async mounted() {
+    await this.getUsers();
   },
   computed: {
     ...mapState(["pagination"]),
+    ...mapGetters(["users"]),
   },
   methods: {
+    async getUsers() {
+      this.loading = true;
+      await this.$store.dispatch("users");
+      this.loading = false;
+    },
     addUser() {
       this.showUser = true;
     },
-    close() {
+    async close(val) {
+      if (val) {
+        await this.getUsers();
+      }
       this.showUser = false;
-      this.userId = null;
+      this.userData = null;
     },
     editUser(data) {
       this.addUser();
-      this.userId = data.id;
-    }
+      this.userData = data;
+    },
   },
 };
 </script>

@@ -20,7 +20,11 @@
                 <label>Email:</label>
               </div>
               <div class="col">
-                <InputText type="text" placeholder="Email"></InputText>
+                <InputText
+                  type="text"
+                  placeholder="Email"
+                  v-model="email"
+                ></InputText>
               </div>
             </div>
           </div>
@@ -30,7 +34,11 @@
                 <label>Password:</label>
               </div>
               <div class="col">
-                <InputText type="password" placeholder="Password"></InputText>
+                <InputText
+                  type="password"
+                  placeholder="Password"
+                  v-model="password"
+                ></InputText>
               </div>
             </div>
           </div>
@@ -39,8 +47,7 @@
 
       <template #footer>
         <div class="flex justify-content-center">
-
-         <Button label="Login" style="width:80%" @click="login"/>
+          <Button label="Login" style="width: 80%" @click="login" />
         </div>
       </template>
     </Card>
@@ -57,10 +64,22 @@ export default {
     };
   },
   methods: {
-    login() {
-      console.log("login");
-    }
-  }
+    async login() {
+      try {
+        await this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password,
+        });
+        this.$router.push({name: "main"})
+      } catch {
+        this.$toast.add({
+          severity: "error",
+          summary: "Login error",
+          detail: "Email or password is incorrect",
+        });
+      }
+    },
+  },
 };
 </script>
 

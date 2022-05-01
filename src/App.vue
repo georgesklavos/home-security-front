@@ -1,13 +1,14 @@
 <template>
-  <router-view/>
+  <Toast />
+  <router-view />
 </template>
 
 <style>
- body {
-   background-color: #040D19;
- }
+body {
+  background-color: #040d19;
+}
 
- .label {
+.label {
   align-self: center;
 }
 </style>

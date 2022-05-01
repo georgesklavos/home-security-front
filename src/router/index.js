@@ -4,16 +4,17 @@ import Home from "../views/Home.vue";
 import Dashboard from "../components/Dashboard.vue";
 import Users from "../components/Users/Users.vue";
 import Alarms from "../components/Alarms/Alarms.vue";
+import Cookies from "js-cookie";
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -21,7 +22,7 @@ const routes = [
   },
   {
     path: '/main',
-    name: 'Main',
+    name: 'main',
     component: Main,
     redirect: () => {
       return {path: "/main/dashboard"};
@@ -40,6 +41,14 @@ const routes = [
         component: Users
       }
     ]
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    redirect: () => {
+      Cookies.remove("token");
+      return {path: '/login'};
+    }
   }
 ]
 

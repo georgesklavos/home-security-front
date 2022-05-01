@@ -1,7 +1,7 @@
 <template>
 <AddAlarm :viewValue="showAddAlarm" @closeDialog="close"></AddAlarm>
   <DataTable
-    :value="users"
+    :value="alarms"
     :paginator="true"
     :rows="10"
     dataKey="id"
@@ -15,7 +15,7 @@
   >
     <template #header>
       <div class="flex justify-content-between align-items-center">
-        <h3 class="m-0">Users</h3>
+        <h3 class="m-0">Alarms</h3>
         <span class="p-input-icon-left">
           <i class="pi pi-search" />
          <Button label="Create alarm" @click="addAlarm">
@@ -24,20 +24,20 @@
         </span>
       </div>
     </template>
-    <template #empty> No users found. </template>
+    <template #empty> No alarms found. </template>
     <Column field="id" header="ID" sortable>
       <template #body="{ data }">
-        {{ data.id }}
+        {{ data._id }}
       </template>
     </Column>
     <Column field="user" header="User ID" sortable>
       <template #body="{ data }">
-        {{ data.user }}
+        {{ data.userId }}
       </template>
     </Column>
-    <Column field="censors" header="Censors" sortable>
+    <Column field="status" header="Status" sortable>
       <template #body="{ data }">
-        {{ data.censors }}
+        {{ data.active ? "Active" : "Inactive" }}
       </template>
     </Column>
   </DataTable>
@@ -45,7 +45,7 @@
 
 <script>
 import { FilterMatchMode } from "primevue/api";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import AddAlarm from "./AddAlarm.vue";
 
 export default {
@@ -60,17 +60,14 @@ export default {
       filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       },
-      users: [
-        {
-          id: 1,
-          user: 23423423423,
-          censors: 10
-        },
-      ],
     };
+  },
+ async mounted() {
+   await this.$store.dispatch("alarms");
   },
   computed: {
     ...mapState(["pagination"]),
+    ...mapGetters(["alarms"])
   },
   methods: {
       addAlarm() {

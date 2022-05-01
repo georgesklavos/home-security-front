@@ -1,9 +1,9 @@
 <template>
   <Dialog
-    :header="userId ? 'Edit User' : 'Create user'"
+    :header="user._id ? 'Edit User' : 'Create user'"
     v-model:visible="show"
     :draggable="false"
-    :style="{ width: '35vw' }"
+    :style="{ width: '40vw' }"
   >
     <div class="grid flex-column grid-nogutter">
       <div class="col">
@@ -32,17 +32,11 @@
             <label>Email:</label>
           </div>
           <div class="col-6">
-            <InputText type="text" v-model="user.email"></InputText>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="grid">
-          <div class="col-3 label">
-            <label>Address:</label>
-          </div>
-          <div class="col-6">
-            <InputText type="text" v-model="user.address"></InputText>
+            <InputText
+              type="text"
+              v-model="user.email"
+              :disabled="user._id ? true : false"
+            ></InputText>
           </div>
         </div>
       </div>
@@ -51,9 +45,11 @@
       <Button label="Cancel" class="p-button-danger" @click="close" autofocus />
 
       <Button
-        label="Create"
+        :label="user._id ? 'Update' : 'Create'"
         class="p-button-success"
-        @click="createUser"
+        @click="addUpdateUser"
+        iconPos="right"
+        :loading="loading"
         autofocus
       />
     </template>
@@ -63,25 +59,25 @@
 <script>
 export default {
   name: "Add user",
-  props: ["viewValue", "userIdValue"],
+  props: ["viewValue", "userData"],
   data() {
     return {
       show: false,
-      userId: null,
+      loading: false,
       user: {
         firstName: "",
         lastName: "",
         email: "",
-        address: "",
       },
     };
   },
+
   watch: {
+    userData() {
+      Object.assign(this.user, this.userData);
+    },
     viewValue(val) {
       this.show = val;
-    },
-    userIdValue(val) {
-      this.userId = val;
     },
     show(val) {
       if (val == false) {
@@ -90,11 +86,33 @@ export default {
     },
   },
   methods: {
-    createUser() {
-      console.log("create user");
+    async addUpdateUser() {
+      if (!this.user._id) {
+        try {
+          this.loading = true;
+          await this.$store.dispatch("createUser", {
+            password: "12345",
+            ...this.user,
+          });
+          this.$toast.add({
+            severity: "success",
+            summary: "Create user",
+            detail: "User was created successfully",
+          });
+        } catch {
+          this.$toast.add({
+            severity: "success",
+            summary: "Create user",
+            detail: "An error has occured",
+          });
+        }
+        this.loading = false;
+        this.close(true);
+      }
     },
-    close() {
-      this.$emit("closeDialog");
+    close(val) {
+      this.user = {};
+      this.$emit("closeDialog", val);
     },
   },
 };

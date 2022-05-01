@@ -3,37 +3,39 @@
     header="Create alarm"
     v-model:visible="show"
     :draggable="false"
-    :style="{ width: '35vw' }"
+    :style="{ width: '40vw' }"
   >
     <div class="grid flex-column grid-nogutter">
-      <div class="col">
+      <div class="col-12">
         <div class="grid">
           <div class="col-3 label">
             <label>User:</label>
           </div>
-          <div class="col-6">
+          <div class="col-9">
             <Dropdown
               v-model="userSelected"
               :options="users"
-              optionLabel="name"
-              optionValue="code"
+              optionLabel="firstName"
+              optionValue="_id"
               placeholder="Select a user"
+              :loading="loading"
             />
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-12">
         <div class="grid">
           <div class="col-3 label">
             <label>Sencors:</label>
           </div>
-          <div class="col-6">
+          <div class="col">
             <MultiSelect
               v-model="selectedCensor"
               :options="censors"
               optionLabel="name"
               :showToggleAll="false"
               placeholder="Select censors"
+              :loading="loading"
             />
           </div>
         </div>
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "Add alarm",
   props: ["viewValue"],
@@ -61,27 +64,29 @@ export default {
       show: false,
       userSelected: {},
       selectedCensor: [],
+      loading: false,
       censors: [
         {
           name: "Motion",
           code: 1,
         },
       ],
-      users: [
-        {
-          name: "testuser",
-          code: 1,
-        },
-      ],
     };
+  },
+  computed: {
+    ...mapGetters(['users'])
   },
   watch: {
     viewValue(val) {
       this.show = val;
     },
-    show(val) {
+   async show(val) {
       if (val == false) {
         this.close();
+      }else {
+        this.loading = true;
+        await Promise.all([this.$store.dispatch("users"), this.$store.dispatch("sensors")])
+        this.loading = false;
       }
     },
   },
