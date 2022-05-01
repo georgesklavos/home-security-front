@@ -63,6 +63,9 @@ export default {
       password: "",
     };
   },
+  mounted() {
+    console.log(process.env);
+  },
   methods: {
     async login() {
       try {
