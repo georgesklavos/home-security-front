@@ -24,7 +24,7 @@
       </div>
     </template>
     <template #empty> No users found. </template>
-    <Column field="id" header="ID" sortable>
+    <Column field="_id" header="ID" sortable>
       <template #body="{ data }">
         {{ data._id }}
       </template>
@@ -39,12 +39,12 @@
         {{ data.lastName }}
       </template>
     </Column>
-    <Column field="email" header="Email" sortable>
+    <Column field="email" header="Email">
       <template #body="{ data }">
         {{ data.email }}
       </template>
     </Column>
-    <Column field="role" header="Role" sortable>
+    <Column field="role" header="Role">
       <template #body="{ data }">
         {{ data.admin ? "Admin" : "Client" }}
       </template>

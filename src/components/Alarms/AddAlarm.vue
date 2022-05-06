@@ -3,6 +3,7 @@
     header="Create alarm"
     v-model:visible="show"
     :draggable="false"
+    modal
     :style="{ width: '40vw' }"
   >
     <div class="grid flex-column grid-nogutter">

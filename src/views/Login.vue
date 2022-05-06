@@ -12,6 +12,9 @@
       style="width: 25rem; margin-bottom: 2em"
       class="flex justify-content-center"
     >
+    <template #title>
+      Login
+    </template>
       <template #content>
         <div class="grid flex-column">
           <div class="col">

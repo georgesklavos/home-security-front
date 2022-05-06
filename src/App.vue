@@ -5,7 +5,8 @@
 
 <style>
 body {
-  background-color: #040d19;
+  /* background-color: #040d19; */
+  margin: 0;
 }
 
 .label {

@@ -3,6 +3,7 @@
     :header="user._id ? 'Edit User' : 'Create user'"
     v-model:visible="show"
     :draggable="false"
+    modal
     :style="{ width: '40vw' }"
   >
     <div class="grid flex-column grid-nogutter">
@@ -11,7 +12,7 @@
           <div class="col-3 label">
             <label>First name:</label>
           </div>
-          <div class="col-6">
+          <div class="col-6 p-fluid">
             <InputText type="text" v-model="user.firstName"></InputText>
           </div>
         </div>
@@ -21,7 +22,7 @@
           <div class="col-3 label">
             <label>Last name:</label>
           </div>
-          <div class="col-6">
+          <div class="col-6 p-fluid">
             <InputText type="text" v-model="user.lastName"></InputText>
           </div>
         </div>
@@ -31,7 +32,7 @@
           <div class="col-3 label">
             <label>Email:</label>
           </div>
-          <div class="col-6">
+          <div class="col-6 p-fluid">
             <InputText
               type="text"
               v-model="user.email"

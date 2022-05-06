@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import "primevue/resources/themes/lara-dark-purple/theme.css";
+import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import  "/node_modules/primeflex/primeflex.css";
@@ -18,6 +18,7 @@ import Dropdown from "primevue/dropdown";
 import MultiSelect  from "primevue/multiselect";
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
+import DeferredContent from "primevue/deferredcontent";
 
 const app = createApp(App);
 app.use(PrimeVue);
@@ -35,7 +36,7 @@ app.component("Column",Column);
 app.component("Dropdown",Dropdown);
 app.component("MultiSelect",MultiSelect);
 app.component('Toast', Toast);
-
+app.component('DeferredContent', DeferredContent);
 
 app.mount('#app');
 

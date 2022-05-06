@@ -25,17 +25,17 @@
       </div>
     </template>
     <template #empty> No alarms found. </template>
-    <Column field="id" header="ID" sortable>
+    <Column field="_id" header="ID" sortable>
       <template #body="{ data }">
         {{ data._id }}
       </template>
     </Column>
-    <Column field="user" header="User ID" sortable>
+    <Column field="userId" header="User ID" sortable>
       <template #body="{ data }">
         {{ data.userId }}
       </template>
     </Column>
-    <Column field="status" header="Status" sortable>
+    <Column field="active" header="Status" sortable>
       <template #body="{ data }">
         {{ data.active ? "Active" : "Inactive" }}
       </template>
