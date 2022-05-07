@@ -1,26 +1,17 @@
 <template>
-<AddAlarm :viewValue="showAddAlarm" @closeDialog="close"></AddAlarm>
-  <DataTable
-    :value="alarms"
-    :paginator="true"
-    :rows="10"
-    dataKey="id"
-    :rowHover="true"
-    showGridlines
-    :filters="filters"
+  <AddAlarm :viewValue="showAddAlarm" @closeDialog="close"></AddAlarm>
+  <DataTable :value="alarms" :paginator="true" :rows="10" dataKey="id" :rowHover="true" showGridlines :filters="filters"
     :loading="loading"
     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-    :rowsPerPageOptions="[10, 25, 50]"
-    :currentPageReportTemplate="pagination"
-  >
+    :rowsPerPageOptions="[10, 25, 50]" :currentPageReportTemplate="pagination">
     <template #header>
       <div class="flex justify-content-between align-items-center">
         <h3 class="m-0">Alarms</h3>
         <span class="p-input-icon-left">
           <i class="pi pi-search" />
-         <Button label="Create alarm" @click="addAlarm">
+          <Button label="Create alarm" @click="addAlarm">
 
-         </Button>
+          </Button>
         </span>
       </div>
     </template>
@@ -62,20 +53,26 @@ export default {
       },
     };
   },
- async mounted() {
-   await this.$store.dispatch("alarms");
+  async mounted() {
+    this.getAlarms();
   },
   computed: {
     ...mapState(["pagination"]),
     ...mapGetters(["alarms"])
   },
   methods: {
-      addAlarm() {
-          this.showAddAlarm = true;
-      },
-      close() {
-        this.showAddAlarm = false;
+    async getAlarms() {
+      await this.$store.dispatch("alarms");
+    },
+    addAlarm() {
+      this.showAddAlarm = true;
+    },
+    async close(val) {
+      if (val) {
+        await this.getAlarms();
       }
+      this.showAddAlarm = false;
+    }
   }
 };
 </script>
