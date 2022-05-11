@@ -8,9 +8,6 @@
           <div class="text-6xl text-primary font-bold mb-3">your visitors deserve to see</div>
           <p class="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-          <Button label="Learn More" type="button" class="mr-3 p-button-raised"></Button>
-          <Button label="Live Demo" type="button" class="p-button-outlined"></Button>
         </section>
       </div>
       <div class="col-12 md:col-6 overflow-hidden fadeinright animation-duration-1000 animation-iteration-1">
@@ -207,58 +204,8 @@
 
   <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
     <div class="text-700 text-center">
-      <div class="text-blue-600 font-bold mb-3"><i class="pi pi-discord"></i>&nbsp;POWERED BY DISCORD</div>
-      <div class="text-900 font-bold text-5xl mb-3">Join Our Design Community</div>
-      <div class="text-700 text-2xl mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam
-        eligendi quos.</div>
-      <div class="flex justify-content-center">
-
-        <Card style="width: 25rem; margin-bottom: 2em" class="flex justify-content-center">
-          <template #title>
-            Contacts us
-          </template>
-          <template #content>
-            <div class="grid flex-column">
-              <div class="col">
-                <div class="grid">
-                  <div class="col label">
-                    <label>First name:</label>
-                  </div>
-                  <div class="col">
-                    <InputText type="text" v-model="contactData.firstName"></InputText>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="grid">
-                  <div class="col label">
-                    <label>Last name:</label>
-                  </div>
-                  <div class="col">
-                    <InputText type="text" v-model="contactData.lastName"></InputText>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="grid">
-                  <div class="col label">
-                    <label>Email:</label>
-                  </div>
-                  <div class="col">
-                    <InputText type="email" v-model="contactData.email"></InputText>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-
-          <template #footer>
-            <div class="flex justify-content-end">
-              <Button label="Contact" style="width: 40%" @click="contact" />
-            </div>
-          </template>
-        </Card>
-      </div>
+      <div class="text-900 font-bold text-5xl mb-3">Join our community</div>
+      <div class="text-700 text-2xl mb-5">You can join us by mailing our support to: <a href="mailto:skv.teamproject@gmail.com">skv.teamproject@gmail.com</a></div>
     </div>
   </div>
 
@@ -267,15 +214,6 @@
 <script>
 export default {
   name: "Home",
-  data() {
-    return {
-      contactData: {
-        firstName: "",
-        lastName: "",
-        email: ""
-      }
-    }
-  },
   methods: {
     loadFeatures() {
       //scalein animation-duration-1000 animation-iteration-1
@@ -288,10 +226,6 @@ export default {
         })
       });
     },
-    contact() {
-
-      this.contactData = {};
-    }
   }
 };
 </script>

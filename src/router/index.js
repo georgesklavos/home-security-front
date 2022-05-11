@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard.vue";
 import Users from "../components/Users/Users.vue";
 import Alarms from "../components/Alarms/Alarms.vue";
 import Cookies from "js-cookie";
+import TestPage from "../views/TestPage.vue"
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },{
+    path: '/testPage',
+    name: 'test',
+    component: TestPage
   },
   {
     path: '/main',

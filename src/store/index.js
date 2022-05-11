@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 import Cookies from "js-cookie";
 import { app } from "../main";
 // let token = "";
-axios.defaults.baseURL = process.env.VUE_APP_BACK_URL;
+axios.defaults.baseURL = "https://team-project-back.herokuapp.com/api/";
 axios.defaults.headers.common["Authorization"] = `Bearer ${Cookies.get(
   "token"
 )}`;
@@ -115,5 +115,12 @@ export default createStore({
         }
       });
     },
+
+    triggerAlarm() {
+      axios.post("device/alarms/trigger/6238df0e4efb5bf7826da067")
+    },
+    toggleAlarm() {
+      axios.put("device/alarms/status/toggle/6238df0e4efb5bf7826da067")
+    }
   },
 });
