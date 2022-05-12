@@ -12,4 +12,8 @@ body {
 .label {
   align-self: center;
 }
+
+html {
+  scroll-behavior: smooth;
+}
 </style>
