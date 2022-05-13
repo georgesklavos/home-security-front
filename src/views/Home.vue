@@ -5,7 +5,7 @@
       <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
         <section>
           <span class="block text-6xl font-bold mb-1">SKV alarm pro</span>
-          <div class="text-6xl text-primary font-bold mb-3">You deserve to fill safe</div>
+          <div class="text-6xl text-primary font-bold mb-3">You deserve to feel safe</div>
           <p class="mt-0 mb-4 text-700 line-height-3">The SKV alarm pro is a plug and play home alarm device to help you secure any environment</p>
         </section>
       </div>
