@@ -10,8 +10,8 @@
         </section>
       </div>
       <div class="col-12 md:col-6 overflow-hidden fadeinright animation-duration-1000 animation-iteration-1">
-        <img src="images/test.png" alt="Image" class="md:ml-auto block md:h-full"
-          style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
+        <img src="images/hero.jpg" alt="Image" class="md:ml-auto block"
+          style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%); height: 500px;">
       </div>
     </div>
   </DeferredContent>
